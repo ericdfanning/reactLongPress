@@ -1,0 +1,22 @@
+{
+  "name": "longpressreact",
+  "version": "1.0.0",
+  "description": "A React wrapper with context provider for click and long press events that also conditionally render children.",
+  "main": "LongPress.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "long",
+    "press",
+    "react",
+    "click",
+    "event",
+    "longpress"
+  ],
+  "author": "Eric Fanning",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^16.13.1"
+  }
+}
