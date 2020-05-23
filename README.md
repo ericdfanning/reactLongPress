@@ -4,32 +4,32 @@ The LongPress component allows you to create a long press on any children you gi
 
 ```jsx
 <LongPress 
-pressTime={300}
-inactiveHide={true}
-inactiveHideTime={2000}
-onClickDefault={onClickDefault}
-id={item.name}
-classNames={'card__command on_button'}
-elementOnInteraction={longPressInteractionElements()}
+  pressTime={300}
+  inactiveHide={true}
+  inactiveHideTime={2000}
+  onClickDefault={onClickDefault}
+  id={item.name}
+  classNames={'card__command on_button'}
+  elementOnInteraction={longPressInteractionElements()}
 >
-<div>
-Some Button text or container that you want clickable.
-</div>
+  <div>
+    Some Button text or container that you want clickable.
+  </div>
 </LongPress>
 ```
 
 ```jsx
-	<LongPress 
-			pressTime={300}
-			inactiveHide={true}
-			inactiveHideTime={2000}
-			onClickDefault={onClickDefault}
-			id={item.name}
-			classNames={'card__command on_button'}
-			elementOnInteraction={longPressInteractionElements()}
-		>
-			<div>
-				{(state > 0 || state === 'ON') ? state: 'Off'}
-			</div>
-		</LongPress>
+<LongPress 
+  pressTime={300}
+  inactiveHide={true}
+  inactiveHideTime={2000}
+  onClickDefault={onClickDefault}
+  id={item.name}
+  classNames={'card__command on_button'}
+  elementOnInteraction={longPressInteractionElements()}
+>
+  <div>
+    {(state > 0 || state === 'ON') ? state: 'Off'}
+  </div>
+</LongPress>
 ```
