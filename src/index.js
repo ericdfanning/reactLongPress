@@ -41,6 +41,7 @@ export const LongPress = ({
 	}, [showInteractionElements]);
 
 	const handleButtonPress = (e) =>{
+		console.log('click')
 		if (callbackRelease) {
 			callbackStart()
 		}
@@ -51,6 +52,7 @@ export const LongPress = ({
  	}
 
 	const handleButtonPressTouch = (e) =>{
+		console.log('touch')
 		if (callbackRelease) {
 			callbackStart()
 		}
@@ -66,8 +68,7 @@ export const LongPress = ({
 		e.preventDefault()
 		let date = new Date()
 		let newTime = date.getSeconds() + Number(date.getMilliseconds()/1000);
-
-		if (Number(Number(newTime - milli).toFixed(3)) >= (pressTime/1000) && e.target.id) {
+		if (Number(Number(newTime - milli).toFixed(3)) >= (pressTime/1000)) {
 			setShowInteractionElements(true)
 			if (callbackRelease) {
 				callbackStart()
