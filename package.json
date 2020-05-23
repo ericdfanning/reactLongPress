@@ -1,10 +1,12 @@
 {
-  "name": "longpressreact",
+  "name": "@tencoder/longpressreact",
   "version": "1.0.0",
   "description": "A React wrapper with context provider for click and long press events that also conditionally render children.",
-  "main": "LongPress.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch"
   },
   "keywords": [
     "long",
@@ -16,7 +18,27 @@
   ],
   "author": "Eric Fanning",
   "license": "ISC",
-  "dependencies": {
+  "peerDependencies": {
     "react": "^16.13.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "react": "^16.13.1",
+    "webpack": "^4.43.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "compression-webpack-plugin": "^3.1.0",
+    "css-loader": "^3.5.2",
+    "eslint": "^7.1.0",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.2",
+    "html-loader": "^1.1.0",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.1.4",
+    "webpack-cli": "^3.3.11"
   }
 }

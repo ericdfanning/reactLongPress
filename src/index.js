@@ -23,9 +23,10 @@ export const LongPress = ({
 	elementOnInteraction = null,
 	children
 }) => {
+
 	const [showInteractionElements, setShowInteractionElements] = useState(false);
 	const [hasInteraction, setHasInteraction] = useState(false);
-	const [isMobile, setIsMobile] = useState(isMobileTablet());
+	const [isMobile, setIsMobile] = useState();
 	const [milli, udpateMilli] = useState(0);
 
 	const interactionRef = useRef(hasInteraction);
@@ -40,7 +41,6 @@ export const LongPress = ({
 	}, [showInteractionElements]);
 
 	const handleButtonPress = (e) =>{
-		console.log('click start')
 		if (callbackRelease) {
 			callbackStart()
 		}
@@ -51,7 +51,6 @@ export const LongPress = ({
  	}
 
 	const handleButtonPressTouch = (e) =>{
-		console.log('touch start')
 		if (callbackRelease) {
 			callbackStart()
 		}
@@ -63,14 +62,12 @@ export const LongPress = ({
  	}
 
 	const handleButtonRelease = (e) => {
-		console.log('button release')
 		e.stopPropagation()
 		e.preventDefault()
 		let date = new Date()
 		let newTime = date.getSeconds() + Number(date.getMilliseconds()/1000);
 
 		if (Number(Number(newTime - milli).toFixed(3)) >= (pressTime/1000) && e.target.id) {
-			console.log('WITHIN TIME THRESHOLD')
 			setShowInteractionElements(true)
 			if (callbackRelease) {
 				callbackStart()
@@ -79,17 +76,14 @@ export const LongPress = ({
 				startInactiveHideTimer()
 			}
 		} else if (Number(Number(newTime - milli).toFixed(3)) < (pressTime/1000)) {
-			console.log('CLICK DEFAULT')
 			onClickDefault()
 		}
 		udpateMilli(0);
   }
 
   const startInactiveHideTimer = () => {
-  	console.log('inactive timer started')
   	setTimeout(() => {
   		if (!interactionRef.current) {
-  			console.log('inactive timer triggered')
   	  	setShowInteractionElements(false);
   		}
   	}, inactiveHideTime)
