@@ -1,7 +1,7 @@
 # Long Press for React
 **For both desktop and touch devices on the web.**
 This wrapper component is only compatible with projects that use React 16.8.0 and up since it uses hooks. 
-The LongPress component allows you to create a long press on any children you give it. Want a simple button? Cool, pass it as a child. Want a whole card on mobile? It'll do that too. If the press time doesn't exceed the specified pressTime in props, it will behave as if the item was clicked.
+The LongPress component allows you to create a long press on any children you give it. Want a simple button? Cool, pass it as a child. Want a whole card on mobile? It'll do that too. If the press time doesn't exceed the specified `pressTime` in props, it will behave as if the item had a normal click.
 
 ### Conditionally Render another child based on the long press
 **This only excepts a single element**  
@@ -14,16 +14,19 @@ const { setHasInteraction, setShowInteractionElements } = useContext(LongPressCo
 Call `setHasInteraction(false)` on its first touch/click event to have it remain visible. And if you want to hide the `elementOnInteraction` after its been engaged with, call `setShowInteractionElements(false)`.
 
 # API
+```json
 pressTime: Number in milliseconds || default = 300,
-inactiveHide: Boolean || default = false,
-inactiveHideTime: Number in milliseconds || default = 3000,
-callbackStart: Function || default = null,
-callbackRelease: Function || default = null,
-onClickDefault: Function || default = null,
+callbackStart: Function || default = null - triggers on start of a touch/click,
+callbackRelease: Function || default = null - triggers on release of a touch/click,
+onClickDefault: Function || default = null - triggers if normal touch/click (no long press),
 id: String || default = '',
 classNames: String || default = '',
-elementOnInteraction: JSX || default = null
+elementOnInteraction: JSX || default = null,
+inactiveHide: Boolean || default = false,
+inactiveHideTime: Number in milliseconds || default = 3000,
+```
 
+### Simple element wrapped with LongPress
 ```jsx
 <LongPress 
   pressTime={300}
@@ -39,7 +42,7 @@ elementOnInteraction: JSX || default = null
   </div>
 </LongPress>
 ```
-
+### My personal usage. Simple on/off button, that shows input element after long press.
 ```jsx
 <LongPress 
   pressTime={300}
