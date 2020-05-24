@@ -23,7 +23,7 @@ id: String || default = '',
 classNames: String || default = '',
 elementOnInteraction: JSX || default = null,
 inactiveHide: Boolean || default = false,
-inactiveHideTime: Number in milliseconds || default = 3000,
+inactiveHideTime: Number in milliseconds || default = 3000
 ```
 
 ### Simple element wrapped with LongPress

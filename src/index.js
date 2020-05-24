@@ -46,19 +46,19 @@ export const LongPress = ({
 	}
 
 	const handleButtonPress = (e) =>{
-		if (callbackStart) {
-			callbackStart()
-		}
 		if (!isMobile) {
+			if (callbackStart) {
+				callbackStart()
+			}
 			udpateMilli(getMiliseconds())
 		}
  	}
 
 	const handleButtonPressTouch = (e) =>{
-		if (callbackStart) {
-			callbackStart()
-		}
 		if (isMobile) {
+			if (callbackStart) {
+				callbackStart()
+			}
 			udpateMilli(getMiliseconds())
 		}
 
