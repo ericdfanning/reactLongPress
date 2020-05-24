@@ -1,6 +1,6 @@
 {
   "name": "@tencoder/longpressreact",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "A React wrapper with context provider for click and long press events that also conditionally render children.",
   "main": "build/index.js",
   "scripts": {
