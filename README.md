@@ -44,6 +44,18 @@ inactiveHideTime: Number in milliseconds || default = 3000,
 ```
 ### My personal usage. Simple on/off button, that shows input element after long press.
 ```jsx
+const longPressInteractionElements = () => {
+  return (
+    <div className={`vertical-slider-container vertical-slider-container__${index}`}>
+      <VerticalSlider
+        update={updateValue}
+        state={state}
+      />
+    </div>
+  )
+}
+```
+```jsx
 <LongPress 
   pressTime={300}
   inactiveHide={true}
