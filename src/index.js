@@ -131,10 +131,8 @@ export const LongPress = ({
 			  onTouchEnd={handleButtonRelease} 
 			  data-longpress-parent={'longpress-parent'}
 			 >
-		 	 	{ 
-		 		 	children
-		 		}
-			 	{ showInteractionElements && cloneElement(elementOnInteraction, { 'data-longpress-child': true }) }
+		 	 	{ children }
+			 	{ showInteractionElements && elementOnInteraction && cloneElement(elementOnInteraction, { 'data-longpress-child': true }) }
 			</div>
 		</LongPressContext.Provider>
 	)
