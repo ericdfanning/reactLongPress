@@ -4,7 +4,7 @@ This wrapper component is only compatible with projects that use React 16.8.0 an
 The LongPress component allows you to create a long press on any children you give it. Want a simple button? Cool, pass it as a child. Want a whole card on mobile? It'll do that too. If the press time doesn't exceed the specified pressTime in props, it will behave as if the item was clicked.
 
 ### Conditionally Render another child based on the long press
-**This only excepts a single element**
+**This only excepts a single element**  
 This can be helpful if you want to render an element based on if the press meets the long press threshold (that you specify with `pressTime`). For example, my use case was a vertical slider input that appears next to the button if the press/click is long enough (for dimming lights on my home network). If you look at the API you'll notice it accepts this conditional element as `elementOnInteraction`. You can specify if you want the element to hide if its not interacted with by setting `inactiveHide` and specify the length of time it takes before it hides with `inactiveHideTime`. If you want the conditional element to hide after the specified time, but want it to stay visible if it's interacted with before the time is up, then you can use the LongPress context in the element you passed in with:
 
 ```js
