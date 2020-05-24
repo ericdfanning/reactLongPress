@@ -14,6 +14,11 @@ const { setHasInteraction, setShowInteractionElements } = useContext(LongPressCo
 Call `setHasInteraction(false)` on its first touch/click event to have it remain visible. And if you want to hide the `elementOnInteraction` after its been engaged with, call `setShowInteractionElements(false)`.
 
 # API
+#### Import
+```js
+import { LongPress } from '@tencoder/longpressreact';
+import { LongPressContext } from '@tencoder/longpressreact';
+```
 ```json
 pressTime: Number in milliseconds || default = 300,
 callbackStart: Function || default = null - triggers on start of a touch/click,
