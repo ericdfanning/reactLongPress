@@ -19,6 +19,7 @@ Call `setHasInteraction(false)` on its first touch/click event to have it remain
 import { LongPress } from '@tencoder/longpressreact';
 import { LongPressContext } from '@tencoder/longpressreact';
 ```
+#### Props
 ```json
 pressTime: Number in milliseconds || default = 300,
 callbackStart: Function || default = null - triggers on start of a touch/click,
