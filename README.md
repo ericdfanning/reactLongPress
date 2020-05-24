@@ -32,6 +32,7 @@ inactiveHide: Boolean || default = false,
 inactiveHideTime: Number in milliseconds || default = 3000
 ```
 
+# Examples
 ### Simple element wrapped with LongPress
 ```jsx
 <LongPress 
