@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, createContext } from 'react';
+import React, { useState, useRef, useEffect, createContext, cloneElement } from 'react';
 
 export const LongPressContext = createContext({});
 
@@ -14,7 +14,7 @@ const isMobileTablet = () => {
 export const LongPress = ({
 	pressTime = 300,
 	inactiveHide = false,
-	inactiveHideTime = 2,
+	inactiveHideTime = 3000,
 	callbackStart = null,
 	callbackRelease = null,
 	onClickDefault = null,
@@ -26,7 +26,7 @@ export const LongPress = ({
 
 	const [showInteractionElements, setShowInteractionElements] = useState(false);
 	const [hasInteraction, setHasInteraction] = useState(false);
-	const [isMobile, setIsMobile] = useState();
+	const [isMobile, setIsMobile] = useState(isMobileTablet());
 	const [milli, udpateMilli] = useState(0);
 
 	const interactionRef = useRef(hasInteraction);
@@ -40,25 +40,26 @@ export const LongPress = ({
 	  showInteractionElementsRef.current = showInteractionElements;
 	}, [showInteractionElements]);
 
+	const getMiliseconds = () => {
+		let date = new Date();
+		return (date.getSeconds() + Number(date.getMilliseconds())/1000);
+	}
+
 	const handleButtonPress = (e) =>{
-		console.log('click')
-		if (callbackRelease) {
+		if (callbackStart) {
 			callbackStart()
 		}
-		let date = new Date()
 		if (!isMobile) {
-			udpateMilli(date.getSeconds() + Number(date.getMilliseconds()/1000))
+			udpateMilli(getMiliseconds())
 		}
  	}
 
 	const handleButtonPressTouch = (e) =>{
-		console.log('touch')
-		if (callbackRelease) {
+		if (callbackStart) {
 			callbackStart()
 		}
-		let date = new Date()
 		if (isMobile) {
-			udpateMilli(date.getSeconds() + Number(date.getMilliseconds()/1000))
+			udpateMilli(getMiliseconds())
 		}
 
  	}
@@ -66,18 +67,39 @@ export const LongPress = ({
 	const handleButtonRelease = (e) => {
 		e.stopPropagation()
 		e.preventDefault()
-		let date = new Date()
-		let newTime = date.getSeconds() + Number(date.getMilliseconds()/1000);
-		if (Number(Number(newTime - milli).toFixed(3)) >= (pressTime/1000)) {
-			setShowInteractionElements(true)
-			if (callbackRelease) {
-				callbackStart()
+		let newTime = getMiliseconds();
+
+		let isChild = false;
+		let element = e.target;
+		let dataset = element && element.dataset;
+		for (let i = 0; ; i++) {
+			if (dataset && dataset.longpressParent) {
+				break;
 			}
-			if (inactiveHide) {
-				startInactiveHideTimer()
+			if (dataset && dataset.longpressChild) {
+				isChild = true;
+				break;
+			} else {
+				element = element.parentElement;
+				dataset = element && element.dataset;
 			}
-		} else if (Number(Number(newTime - milli).toFixed(3)) < (pressTime/1000)) {
-			onClickDefault()
+	
+		}
+
+		if (!isChild) {
+			if (Number(Number(newTime - milli).toFixed(3)) >= (pressTime/1000)) {
+				setShowInteractionElements(true)
+				if (callbackRelease) {
+					callbackRelease()
+				}
+				if (inactiveHide) {
+					startInactiveHideTimer()
+				}
+			} else if (Number(Number(newTime - milli).toFixed(3)) < (pressTime/1000)) {
+				if (onClickDefault) {
+					onClickDefault()
+				}
+			}
 		}
 		udpateMilli(0);
   }
@@ -97,6 +119,9 @@ export const LongPress = ({
   	setShowInteractionElements
   }
 
+  //current issue is that its firing the start and release buttons on the slider because its a child component.
+  // need to figure out how to prevent the clicks and only do it if it matches the parent Long press container
+
 	return (
 		<LongPressContext.Provider value={contextValues}>
 			<div className={classNames} id={id}
@@ -104,9 +129,12 @@ export const LongPress = ({
 			  onMouseDown={handleButtonPress} 
 			  onMouseUp={handleButtonRelease}
 			  onTouchEnd={handleButtonRelease} 
+			  data-longpress-parent={'longpress-parent'}
 			 >
-			 	{ children }
-			 	{ showInteractionElements && elementOnInteraction }
+		 	 	{ 
+		 		 	children
+		 		}
+			 	{ showInteractionElements && cloneElement(elementOnInteraction, { 'data-longpress-child': true }) }
 			</div>
 		</LongPressContext.Provider>
 	)
